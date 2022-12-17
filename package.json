@@ -1,0 +1,19 @@
+{
+  "name": "quay-js",
+  "version": "0.0.1",
+  "description": "A JS SDK that integrates the SeaportJS SDK with Quay",
+  "main": "index.js",
+  "author": "George Hervey",
+  "license": "MIT",
+  "scripts": {
+    "tsc": "tsc"
+  },
+  "dependencies": {
+    "@opensea/seaport-js": "^1.0.8",
+    "ethers": "^5.7.2",
+    "siwe": "^1.1.6"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  }
+}
