@@ -1,10 +1,14 @@
 {
   "name": "quay-js",
-  "version": "0.0.1",
-  "description": "A JS SDK that integrates the SeaportJS SDK with Quay",
-  "main": "index.js",
-  "author": "George Hervey",
+  "version": "0.0.2",
+  "description": "An extended Javascript library to interact with the Seaport marketplace and Quay backend.",
   "license": "MIT",
+  "main": "dist/index.js",
+  "files": [
+    "dist/",
+    "src/"
+  ],
+  "repository": "https://github.com/geovgy/quay-js",
   "scripts": {
     "tsc": "tsc"
   },
