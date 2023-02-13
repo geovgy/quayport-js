@@ -7,8 +7,11 @@ export class Quay extends Seaport {
     backendUrl: string;
     session: string;
 
-    constructor(providerOrSigner: JsonRpcProvider | Signer, considerationConfig: SeaportConfig | undefined, backendUrl: string, session: string) {
+    constructor(providerOrSigner: JsonRpcProvider | Signer, backendUrl: string, session?: string, considerationConfig?: SeaportConfig | undefined) {
         super(providerOrSigner, considerationConfig)
+        if (!session) {
+            session = ""
+        }
         this.backendUrl = backendUrl
         this.session = session
     }
@@ -16,7 +19,7 @@ export class Quay extends Seaport {
     // Core functions
 
     // Authentication
-    async nonce() {
+    private async nonce() {
 		const res = await fetch(`${this.backendUrl}/nonce`)
 		const setCookie = res.headers.get('set-cookie')
 		const cookieArray = setCookie?.split(';')
@@ -28,10 +31,11 @@ export class Quay extends Seaport {
 		const { message, session } = await this.signInWithEthereum(await signer.getAddress(), statement, domain, origin, version, chainId)
 		const signature = await signer.signMessage(message)
 		const response = await this.verifySiweSignature(session, message, signature)
+        this.session = typeof session === "string" ? session : ""
 		return { response, session }
 	}
 	
-	async isVerified(session: any) {
+	async isVerified(session: string) {
 		const res = await fetch(`${this.backendUrl}/authenticate`, {
 			method: "POST",
 			headers: {
@@ -44,8 +48,8 @@ export class Quay extends Seaport {
 	}
 
     // Order POST request functions
-    async makeListing(session: any, order: OrderUseCase<CreateOrderAction>) {
-        const verified = await this.isVerified(session);
+    async makeListing(order: OrderUseCase<CreateOrderAction>) {
+        const verified = await this.isVerified(this.session);
         if (!verified) throw Error("Invalid session. Unable to execute order.")
         if (!this.backendUrl) throw Error("Invalid Backend URL.")
 
@@ -55,13 +59,13 @@ export class Quay extends Seaport {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ session, listing: JSON.stringify(signedOrder) })
+          body: JSON.stringify({ session: this.session, listing: JSON.stringify(signedOrder) })
         })
         return await res.json()
     }
 
-    async makeOffer(session: any, order: OrderUseCase<CreateOrderAction>) {
-        const verified = await this.isVerified(session);
+    async makeOffer(order: OrderUseCase<CreateOrderAction>) {
+        const verified = await this.isVerified(this.session);
         if (!verified) throw Error("Invalid session. Unable to execute order.")
         if (!this.backendUrl) throw Error("Invalid Backend URL.")
 
@@ -71,7 +75,7 @@ export class Quay extends Seaport {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ session, listing: JSON.stringify(signedOrder) })
+          body: JSON.stringify({ session: this.session, listing: JSON.stringify(signedOrder) })
         })
         return await res.json()
     }
@@ -210,7 +214,6 @@ export class Quay extends Seaport {
 			nonce
 		})
 	
-		// return { message: message.prepareMessage(), session: response.cookie, nonce: response.nonce }
 		return message.prepareMessage()
 	}
 	
