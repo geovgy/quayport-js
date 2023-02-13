@@ -1,14 +1,19 @@
 {
   "name": "quay-js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "An extended Javascript library to interact with the Seaport marketplace and Quay backend.",
   "license": "MIT",
+  "author": "George Hervey",
+  "homepage": "https://github.com/geovgy/quay-js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geovgy/quay-js.git"
+  },
   "main": "dist/index.js",
   "files": [
     "dist/",
     "src/"
   ],
-  "repository": "https://github.com/geovgy/quay-js",
   "scripts": {
     "tsc": "tsc"
   },
