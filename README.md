@@ -1,19 +1,19 @@
-# QuayJS
+# Quayport.js
 An extended Javascript library to interact with the Seaport marketplace and Quay backend.
 
-QuayJS extends upon [Seaport.js](https://github.com/ProjectOpenSea/seaport-js) to include additional functions for calling API endpoints to a [Quay](https://github.com/Alcibiades-Capital/quay) backend. Use QuayJS the same way as you would use Seaport.js with the only difference being new capabilities for a full-stack application.
+Quayport.js extends upon [Seaport.js](https://github.com/ProjectOpenSea/seaport-js) to include additional functions for calling API endpoints to a [Quay](https://github.com/Alcibiades-Capital/quay) backend. Use QuayJS the same way as you would use Seaport.js with the only difference being new capabilities for a full-stack application.
 
 ## Getting Started
 1. Install the package
 ```shell
-npm install quay-js
+npm install quayport-js
 ```
 
 2. Instantiate your instance of quay using your ethers provider and base url to your Quay backend server.
 
 Here is an example using the injected provider from a browser extension wallet:
 ```javascript
-import { Quay } from "quay-js";
+import { Quay } from "quayport-js";
 import { ethers } from "ethers";
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
