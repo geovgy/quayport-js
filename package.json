@@ -1,6 +1,6 @@
 {
   "name": "quayport-js",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "An extended Javascript library to interact with the Seaport marketplace and Quay backend.",
   "license": "MIT",
   "author": "George Hervey",
@@ -14,6 +14,7 @@
     "dist/",
     "src/"
   ],
+  "types": "src/types/index.d.ts",
   "scripts": {
     "tsc": "tsc"
   },
