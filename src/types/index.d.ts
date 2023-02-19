@@ -3,6 +3,8 @@ import { SeaportConfig, OrderUseCase, CreateOrderAction } from "@opensea/seaport
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { Signer } from "@opensea/seaport-js/lib/types";
 
+export * from "@opensea/seaport-js/lib/types";
+
 export declare class Quay extends Seaport {
     backendUrl: string;
     session: string;
